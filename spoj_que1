@@ -1,0 +1,91 @@
+import java.util.*;
+import java.math.*;
+import java.io.*;
+class spoj_que1
+{
+	public static void main(String args [])	throws IOException
+	{
+		//BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
+		Scanner sc=new Scanner(System.in);
+		PrintWriter pw=new PrintWriter(System.out, true);
+		int t=sc.nextInt();
+		while(t-->0)
+		{
+			int size=0;
+			LinkedList list=new LinkedList();
+			size=sc.nextInt();
+			int height[]=new int[size];
+			int order[]=new int[size];
+			for(int i=0; i<size; i++)
+			{
+				height[i]=sc.nextInt();
+			}
+			for(int i1=0; i1<size; i1++)
+			{
+				order[i1]=sc.nextInt();
+			}
+			spoj_que1 obj=new spoj_que1();
+			obj.sort(height,order);
+			int last=0;
+			list.addFirst(height[size-1]);
+			for(int j=size-2; j>=0; j--)
+			{
+				list.add(last-order[j]+1,height[j]);				
+				last+=1;
+			}
+			for(int pr=size-1; pr>=0; pr--)
+			{pw.print(list.get(pr)+" ");}
+		pw.println();
+	
+		}
+		
+	}
+	public void sort(int[] inputArr,int[] input1) 
+	{
+		if(inputArr.length <=0)
+			return;
+        this.array = inputArr;
+		this.array1 = input1;
+        length = inputArr.length;
+        quickSort(0, length - 1);
+    }
+	static int array[];
+	static int array1[];
+    static int length;
+	private void exchangeNumbers(int i, int j) 
+	{
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+		  temp = array1[i];
+        array1[i] = array1[j];
+        array1[j] = temp;
+    }
+    private void quickSort(int lowerIndex, int higherIndex) 
+	{       
+        int i = lowerIndex;
+        int j = higherIndex;
+        int pivot = array[lowerIndex+(higherIndex-lowerIndex)/2];
+        while (i <= j) 
+		{
+            while (array[i] < pivot) 
+			{
+				i++;
+            }
+            while (array[j] > pivot) 
+			{
+                j--;
+            }
+            if (i <= j) 
+			{
+                exchangeNumbers(i, j);
+                i++;
+                j--;
+            }
+        }
+        if (lowerIndex < j)
+            quickSort(lowerIndex, j);
+        if (i < higherIndex)
+            quickSort(i, higherIndex);
+    }
+}
