@@ -1,2 +1,2 @@
 # SPOJ
-spoj solutions in java
+spoj solutions in java and C++
